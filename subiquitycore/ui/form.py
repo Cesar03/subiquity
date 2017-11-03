@@ -273,11 +273,15 @@ class Form(object, metaclass=MetaForm):
     signals = ['submit', 'cancel']
 
     ok_label = _("Done")
+    cancel_label = _("Cancel")
+
+    def make_buttons(self):
+        self.done_btn = done_btn(label=self.ok_label, on_press=self._click_done)
+        self.cancel_btn = cancel_btn(label=self.cancel_label, on_press=self._click_cancel)
+        return [self.done_btn, self.cancel_btn]
 
     def __init__(self, initial={}):
-        self.done_btn = Toggleable(done_btn(label=self.ok_label, on_press=self._click_done))
-        self.cancel_btn = Toggleable(cancel_btn(on_press=self._click_cancel))
-        self.buttons = button_pile([self.done_btn, self.cancel_btn])
+        self.buttons = button_pile([Toggleable(b) for b in self.make_buttons()])
         self._fields = []
         for field in self._unbound_fields:
             bf = field.bind(self)

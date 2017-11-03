@@ -20,6 +20,7 @@ from urwid import (
     Text,
     )
 
+from subiquitycore.ui.buttons import reset_btn
 from subiquitycore.ui.container import (
     ListBox,
     Pile,
@@ -46,8 +47,15 @@ class ChoiceField(FormField):
 
 class KeyboardForm(Form):
 
-    layout = ChoiceField(_("Layout"), choices=["dummy"])
-    variant = ChoiceField(_("Variant"), choices=["dummy"])
+    cancel_label = _("Back")
+
+    def make_buttons(self):
+        buttons = super().make_buttons()
+        buttons.insert(1, reset_btn(label=_("Identify keyboard")))
+        return buttons
+
+    layout = ChoiceField(_("Layout:"), choices=["dummy"])
+    variant = ChoiceField(_("Variant:"), choices=["dummy"])
 
 
 class KeyboardView(BaseView):
