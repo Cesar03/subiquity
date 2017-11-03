@@ -27,6 +27,7 @@ class Subiquity(Application):
     project = "subiquity"
     controllers = [
             "Welcome",
+            "Keyboard",
             "Network",
             "Filesystem",
             "Identity",

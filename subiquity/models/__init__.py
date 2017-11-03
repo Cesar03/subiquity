@@ -17,4 +17,5 @@ from .installpath import InstallpathModel  # NOQA
 from .installprogress import InstallProgressModel  # NOQA
 from .filesystem import FilesystemModel  # NOQA
 from .raid import RaidModel  # NOQA
+from .keyboard import KeyboardModel
 from .welcome import WelcomeModel
