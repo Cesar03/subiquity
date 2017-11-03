@@ -26,7 +26,7 @@ from urwid import (
     WidgetWrap,
     )
 
-from subiquitycore.ui.container import Pile
+from subiquitycore.ui.container import ListBox, Pile
 
 
 class _PopUpButton(SelectableIcon):
@@ -63,10 +63,9 @@ class _PopUpSelectDialog(WidgetWrap):
             else:
                 btn = Text("    " + option.label)
                 group.append(AttrWrap(btn, 'info_minor'))
-        pile = Pile(group)
-        pile.set_focus(group[cur_index])
-        fill = Filler(pile, valign=TOP)
-        super().__init__(LineBox(fill))
+        pile = ListBox(group)
+        pile.focus_position = cur_index
+        super().__init__(LineBox(pile))
 
     def click(self, btn, index):
         self.parent.index = index
